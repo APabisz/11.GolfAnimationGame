@@ -32,7 +32,7 @@ const setGuyAnimationsOnFocusState = () => {
   guy_leg_right.style.animation = "leg-focus 2.5s infinite"
 }
 
-const setGuyAnimationsOnHitState = () => {
+const setGuyAnimationsOnHitState = (progressPercent) => {
   golf_ball.style.animation =
     "golf-ball-x 2s .8s cubic-bezier(.18, .37, .71, .86) forwards, golf-ball-y 2s .8s cubic-bezier(0.33333, 0.66667, 0.66667, 1) forwards"
 
@@ -40,6 +40,12 @@ const setGuyAnimationsOnHitState = () => {
     "--golf-power-deg",
     getCurrentRotation(stick)
   )
+
+  document.documentElement.style.setProperty(
+    "--power-x",
+    `${20 + progressPercent * 70}vw`
+  )
+
   stick.style.animation = "stick-hit 2.5s forwards"
   guy_head.style.animation = "head-hit 2.5s forwards"
   guy_body.style.animation = "body-hit 2.5s forwards"
@@ -73,8 +79,7 @@ const hitGolfBall = () => {
   const progressPercent = (fillWidth / barWidth).toFixed(2)
   btn.textContent = `Power of your hit: ${(progressPercent * 100).toFixed()}%`
 
-  setBallDistance(20 + progressPercent * 70)
-  setGuyAnimationsOnHitState()
+  setGuyAnimationsOnHitState(progressPercent)
 
   window.removeEventListener("mouseup", hitGolfBall)
   window.removeEventListener("touchend", hitGolfBall)
@@ -98,15 +103,6 @@ const resetAnimation = () => {
 
 btn.addEventListener("mousedown", mindFocus)
 btn.addEventListener("touchstart", mindFocus)
-
-const setBallDistance = (move) => {
-  const myRules = document.styleSheets[0].cssRules
-  for (const item of myRules) {
-    if (item.name === "golf-ball-x") {
-      item.appendRule(`100% {left:${move}vw}`)
-    }
-  }
-}
 
 function getCurrentRotation(el) {
   var st = window.getComputedStyle(el, null)

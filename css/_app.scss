@@ -538,9 +538,9 @@ body {
 }
 
 @keyframes golf-ball-x {
-  // 100% {
-  //   left: var(--power-x)
-  // }
+  100% {
+    left: var(--power-x)
+  }
 }
 
 @keyframes golf-ball-y {
