@@ -50,7 +50,6 @@ const setGuyAnimationsOnHitState = () => {
 }
 
 const mindFocus = () => {
-  console.log("Focus!")
   fill.style.animationName = "fill"
   fill.style.animationPlayState = "running"
   setGuyAnimationsOnFocusState()
@@ -64,7 +63,6 @@ const mindFocus = () => {
 }
 
 const hitGolfBall = () => {
-  console.log("Hit!")
   btn.style.backgroundColor = "midnightblue"
   fill.style.animationPlayState = "paused"
 
@@ -89,7 +87,6 @@ const resetAnimation = () => {
   setGuyAnimationsOnBreathingState()
 
   setTimeout(() => {
-    console.log("Reset")
     btn.addEventListener("mousedown", mindFocus)
     btn.addEventListener("touchstart", mindFocus)
     btn.style.backgroundColor = ""
